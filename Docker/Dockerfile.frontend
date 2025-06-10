@@ -1,0 +1,17 @@
+FROM oven/bun:1
+WORKDIR /user/src/app
+
+ARG DATABASE_URL
+COPY ./packages ./packages
+COPY ./bun.lock ./bnu.lock
+COPY ./turbo.json ./turbo.json
+COPY ./package.json ./package.json
+COPY ./apps/docs  ./apps/docs
+
+RUN bun i
+RUN bun run db:generate
+RUN DATABASE_URL=${DATABASE_URL} bun run build
+
+EXPOSE 3000
+
+CMD [ "bun","run","start:docs" ]

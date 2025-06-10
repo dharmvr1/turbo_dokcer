@@ -1,0 +1,28 @@
+{
+  "name": "turbo_dokcer",
+  "private": true,
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "check-types": "turbo run check-types",
+    "db:generate":"cd ./packages/db && bun prisma generate && cd ../..",
+    "start:docs":"cd ./apps/docs && bun run start",
+    "start:backend":"cd ./apps/backend && bun run index.ts && cd ../..",
+    "start:ws":"cd ./apps/websocket && bun run index.ts && cd ../.."
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3",
+    "turbo": "^2.5.4",
+    "typescript": "5.8.2"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "packageManager": "bun@1.2.15",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
